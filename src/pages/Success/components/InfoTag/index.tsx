@@ -1,3 +1,5 @@
+import {ReactElement} from "react";
+
 import {IconCircle} from "../../../Home/components/RoundedIconText/styles.ts";
 import {InfoTagContainer, InfoTagText} from "./styles.ts";
 import {Icon} from "@phosphor-icons/react";
@@ -8,8 +10,8 @@ interface InfoTagProps {
     Icon: Icon;
     iconBackgroundColor: ThemeColor;
     iconColor?: ThemeColor;
-    firstText: string;
-    secondText: string;
+    firstText: ReactElement<HTMLSpanElement>;
+    secondText: ReactElement<HTMLSpanElement>;
 }
 
 export function InfoTag({ Icon, iconBackgroundColor, iconColor = "white", firstText, secondText }: InfoTagProps) {
@@ -19,8 +21,8 @@ export function InfoTag({ Icon, iconBackgroundColor, iconColor = "white", firstT
                 <Icon size={16} weight={"fill"} />
             </IconCircle>
             <InfoTagText>
-                <span>{firstText}</span>
-                <span>{secondText}</span>
+                {firstText}
+                {secondText}
             </InfoTagText>
         </InfoTagContainer>
     );

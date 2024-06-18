@@ -1,15 +1,7 @@
-export enum CoffeeTypes {
-    TRADICIONAL = "TRADICIONAL",
-    GELADO = "GELADO",
-    COM_LEITE = "COM LEITE",
-    ALCOOLICO = "ALCOÓLICO",
-    ESPECIAL = "ESPECIAL"
-}
-
 export interface ICoffee {
-    id: number;
+    id: string;
     title: string;
-    type: CoffeeTypes[];
+    type: string[];
     description: string;
     price: number;
     image: string;

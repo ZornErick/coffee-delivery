@@ -1,7 +1,4 @@
-import {ICoffee} from "./Coffee.ts";
-
-export interface CartItem {
+export interface IItem {
     id: string;
-    coffee: ICoffee;
     quantity: number;
 }

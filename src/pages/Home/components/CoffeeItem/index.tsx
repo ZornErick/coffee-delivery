@@ -1,9 +1,10 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {ItemQuantityController} from "../../../../components/ItemQuantityController";
 
 import {CoffeeItemCard, CoffeeItemFooter, CoffeeItemFunc, CoffeeItemText, CoffeeItemType, PriceTag} from "./styles.ts";
 import {ICoffee} from "../../../../interfaces/Coffee.ts";
 import {ShoppingCart} from "@phosphor-icons/react";
+import {CartContext} from "../../../../contexts/CartContext.tsx";
 
 
 interface CoffeeItemProps {
@@ -12,6 +13,7 @@ interface CoffeeItemProps {
 
 export function CoffeeItem({ coffee }: CoffeeItemProps) {
     const [coffeeItemQuantity, setCoffeeItemQuantity] = useState(1);
+    const { addCoffeeItemToCart } = useContext(CartContext);
 
     const coffeePrice = coffee.price.toLocaleString("pt-BR", {style: "currency", currency: "BRL"}).substring(2).trim()
 
@@ -23,6 +25,11 @@ export function CoffeeItem({ coffee }: CoffeeItemProps) {
         if (coffeeItemQuantity > 1) {
             setCoffeeItemQuantity((state) => state - 1)
         }
+    }
+
+    function handleAddCoffeeItemToCart() {
+        addCoffeeItemToCart({id: coffee.id, quantity: coffeeItemQuantity});
+        setCoffeeItemQuantity(1)
     }
 
     return (
@@ -49,7 +56,7 @@ export function CoffeeItem({ coffee }: CoffeeItemProps) {
                         handleIncrementItemQuantity={handleIncrementItemQuantity}
                         handleDecrementItemQuantity={handleDecrementItemQuantity}
                     />
-                    <button type={"button"}>
+                    <button type={"button"} onClick={handleAddCoffeeItemToCart}>
                         <ShoppingCart size={22} weight={"fill"} />
                     </button>
                 </CoffeeItemFunc>
